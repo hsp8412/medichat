@@ -7,12 +7,16 @@ config.autoAddCss = false; /* eslint-disable import/first */
 import { Lexend } from "next/font/google";
 import { ReactNode } from "react";
 import NextAuthProvider from "@/app/components/nextAuthProvider";
+import Navbar from "@/app/components/navbar/navbar";
+import "../globals.css";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const lexend = Lexend({ subsets: ["latin"] });
 
 export const metadata = {
-    title: "Oncology Outcomes",
-    description: "This is the official website of Oncology Outcomes (O2).",
+  title: "Medichat",
+  description: "This is the home page of Medichat.",
 };
 
 /**
@@ -20,24 +24,22 @@ export const metadata = {
  * @param children - The page content to display in the layout.
  */
 
-export default function Layout({ children }: { children: ReactNode }) {
-    return (
-        <html lang="en">
+export default async function Layout({ children }: { children: ReactNode }) {
+  const session = await getServerSession(authOptions);
+  let role = "Patient";
+  if (session && session.user.role === "Doctor") {
+    role = "Doctor";
+  }
+  return (
+    <html lang="en">
+      <NextAuthProvider>
         <body className={`${lexend.className}`}>
-        <section id="" className="w-full relative h-screen">
-            <NextAuthProvider >
-            {/*Background gradient*/}
-            <div className="absolute inset-0 bg-white opacity-30 h-screen" />
-            <div className="bg-gradient-to-bl from-lime-600 to-cyan-700 w-full h-screen" />
-            {/*Content*/}
-            <div className="2xl:container absolute top-1/2 transform -translate-y-1/2 w-full h-screen flex justify-center items-center">
-                <div className="py-6 px-4 lg:px-0 backdrop-blur bg-white/30 w-10/12 lg:w-6/12 rounded-3xl relative">
-                    {children}
-                </div>
-            </div>
-            </NextAuthProvider>
-        </section>
+          <section id="" className="w-full flex flex-col h-screen">
+            <Navbar role={role} />
+            {children}
+          </section>
         </body>
-        </html>
-    );
+      </NextAuthProvider>
+    </html>
+  );
 }
