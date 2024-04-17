@@ -4,12 +4,12 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import {
   faBedPulse,
-  faCoffee,
   faCommentMedical,
   faUser,
   faUserDoctor,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const patientTabs = [
   {
@@ -55,6 +55,7 @@ const doctorTabs = [
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
+
   let role = "Patient";
   if (session && session.user.role === "Doctor") {
     role = "Doctor";

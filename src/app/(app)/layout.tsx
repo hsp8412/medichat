@@ -13,6 +13,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const lexend = Lexend({ subsets: ["latin"] });
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Medichat",
@@ -26,6 +29,9 @@ export const metadata = {
 
 export default async function Layout({ children }: { children: ReactNode }) {
   const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect("/");
+  }
   let role = "Patient";
   if (session && session.user.role === "Doctor") {
     role = "Doctor";
@@ -34,10 +40,14 @@ export default async function Layout({ children }: { children: ReactNode }) {
     <html lang="en">
       <NextAuthProvider>
         <body className={`${lexend.className}`}>
-          <section id="" className="w-full flex flex-col h-screen">
+          <section
+            id=""
+            className="w-full flex flex-col h-screen overflow-auto"
+          >
             <Navbar role={role} />
             {children}
           </section>
+          <ToastContainer position="bottom-right" />
         </body>
       </NextAuthProvider>
     </html>
