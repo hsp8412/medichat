@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { getThreads } from "@/app/services/threadService";
 import { Message, Thread, User } from ".prisma/client";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
 
 const ThreadsList = ({ type }: { type: "patient" | "doctor" }) => {
   const [threads, setThreads] = useState<
     (Thread & { messages: Message[]; doctor: User; patient: User })[]
   >([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   const fetchThreads = async () => {
     try {
@@ -26,6 +26,10 @@ const ThreadsList = ({ type }: { type: "patient" | "doctor" }) => {
     fetchThreads();
   }, []);
 
+  const handleSelectThread = (thread: Thread) => {
+    router.push(`/threads/${thread.id}`);
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -38,6 +42,7 @@ const ThreadsList = ({ type }: { type: "patient" | "doctor" }) => {
             <div
               key={thread.id}
               className={"bg-white p-4 grid grid-cols-5 rounded h-full w-full"}
+              onClick={() => handleSelectThread(thread)}
             >
               <div className={"col-span-1 flex justify-center items-center"}>
                 <img

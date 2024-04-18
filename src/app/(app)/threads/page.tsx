@@ -1,7 +1,7 @@
 import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import ThreadsList from "@/app/components/ThreadsList";
+import ThreadsList from "@/app/components/threadsList";
 
 const Page = async () => {
   const session = await getServerSession(authOptions);

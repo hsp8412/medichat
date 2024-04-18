@@ -31,3 +31,36 @@ export const getThreads = async () => {
     throw e;
   }
 };
+
+export const getThread = async (id: string) => {
+  try {
+    const res = await httpService.get(`${urlBase}/thread/${id}`);
+    return res.data.thread;
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const addMessage = async ({
+  threadId,
+  message,
+  senderId,
+  receiverId,
+}: {
+  threadId: string;
+  message: string;
+  senderId: string;
+  receiverId: string;
+}) => {
+  try {
+    const res = await httpService.post(`${urlBase}/thread/message`, {
+      threadId: threadId,
+      message: message,
+      senderId: senderId,
+      receiverId: receiverId,
+    });
+    return res.data.newMessage;
+  } catch (e) {
+    throw e;
+  }
+};

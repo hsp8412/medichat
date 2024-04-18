@@ -77,7 +77,7 @@ const Navbar = ({ role }: { role: string }) => {
   }
 
   return (
-    <nav className="p-5 bg-white shadow lg:flex lg:items-center lg:justify-between dark:bg-neutral-800">
+    <nav className="px-5 bg-white shadow lg:flex lg:items-center lg:justify-between dark:bg-neutral-800 min-h-[80px] ">
       <div className="flex justify-between items-center">
         <Link href="/" className=" cursor-pointer flex items-center">
           <img src="/chat.png" alt="logo" width={40} height={40} />

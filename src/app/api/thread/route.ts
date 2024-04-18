@@ -37,8 +37,28 @@ export async function GET(req: Request) {
           createdAt: "desc",
         },
       },
-      doctor: true,
-      patient: true,
+      doctor: {
+        select: {
+          id: true,
+          username: true,
+          email: true,
+          role: true,
+          bio: true,
+          avatarUrl: true,
+          speciality: true,
+        },
+      },
+      patient: {
+        select: {
+          id: true,
+          username: true,
+          email: true,
+          role: true,
+          bio: true,
+          avatarUrl: true,
+          speciality: true,
+        },
+      },
     },
   });
 
@@ -83,6 +103,8 @@ export async function POST(req: Request) {
       threadId: newThread.id,
       type: "Text",
       content: message,
+      senderId: session.user.id,
+      receiverId: session.user.id === doctorId ? patientId : doctorId,
     },
   });
 
