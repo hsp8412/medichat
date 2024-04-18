@@ -47,21 +47,14 @@ const UsersList = ({ type }: Props) => {
     return <div>Loading...</div>;
   }
 
-  if (type === "doctor") {
-    return (
-      <div>
-        {users.map((user) => (
-          <div key={user.id}>{user.username}</div>
-        ))}
-      </div>
-    );
-  }
+  let filteredUsers = users.filter((user) => user.role !== type);
+  console.log(filteredUsers);
 
   return (
     <>
       <div className={"w-full flex justify-center my-6"}>
         <div className={"w-8/12 grid grid-cols-3 gap-3"}>
-          {users.map((user) => (
+          {filteredUsers.map((user) => (
             <div
               key={user.id}
               className={
@@ -76,6 +69,9 @@ const UsersList = ({ type }: Props) => {
               <p className={"mt-3 text-2xl font-semibold text-primary"}>
                 {user.username}
               </p>
+              {user.specialties && (
+                <p className={"text-lg text-neutral-600"}>{user.specialties}</p>
+              )}
               <p className={"text-center "}>{user.bio}</p>
               <div className={"mt-3"}>
                 <button

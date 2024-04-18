@@ -1,10 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import Link from "next/link";
 import NavItem from "@/app/components/navbar/navItem";
 import { signOut, useSession } from "next-auth/react";
+import { Message } from ".prisma/client";
+import { getMessages } from "@/app/services/threadService";
+import { toast } from "react-toastify";
 
 export type NavLink = {
   id: string;
@@ -12,13 +15,14 @@ export type NavLink = {
   link: string;
   displayOrder: number;
   display: boolean;
+  unreadSignal?: boolean;
 };
 
 const patientNavItems: NavLink[] = [
   {
     id: "1",
     label: "Home",
-    link: "/",
+    link: "/home",
     displayOrder: 1,
     display: true,
   },
@@ -59,6 +63,7 @@ const doctorNavItems: NavLink[] = [
     link: "/threads",
     displayOrder: 4,
     display: true,
+    unreadSignal: true,
   },
 ];
 
@@ -81,7 +86,9 @@ const Navbar = ({ role }: { role: string }) => {
       <div className="flex justify-between items-center">
         <Link href="/" className=" cursor-pointer flex items-center">
           <img src="/chat.png" alt="logo" width={40} height={40} />
-          <span className="text-2xl ml-2">Medichat</span>
+          <span className="text-2xl ml-2 font-bold text-secondary">
+            Medichat
+          </span>
         </Link>
         <button className=" mx-2 lg:hidden block" onClick={handleToggleMenu}>
           <FontAwesomeIcon

@@ -23,7 +23,7 @@ export async function GET(
     include: {
       messages: {
         orderBy: {
-          createdAt: "desc",
+          createdAt: "asc",
         },
       },
       doctor: true,

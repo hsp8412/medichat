@@ -64,3 +64,12 @@ export const addMessage = async ({
     throw e;
   }
 };
+
+export const getMessages = async () => {
+  try {
+    const res = await httpService.get(`${urlBase}/users/message`);
+    return res.data.messages;
+  } catch (e) {
+    throw e;
+  }
+};
