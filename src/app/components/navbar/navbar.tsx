@@ -122,7 +122,12 @@ const Navbar = ({ role }: { role: string }) => {
         <li className="mx-2 lg:mx-3 my-6 lg:my-0">
           <button
             onClick={() => {
-              signOut({ callbackUrl: `${process.env.NEXT_PUBLIC_URL_BASE}` });
+              signOut({
+                callbackUrl:
+                  process.env.NODE_ENV === "production"
+                    ? `https://${process.env.VERCEL_URL}`
+                    : `${process.env.NEXT_PUBLIC_URL_BASE}`,
+              });
             }}
             className={
               "bg-primary text-white px-2 py-2.5 rounded-xl hover:bg-primary-hover transition-colors duration-200 ease-in"

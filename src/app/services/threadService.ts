@@ -1,7 +1,10 @@
 import httpService from "@/app/services/httpService";
 import { Thread } from ".prisma/client";
 
-const urlBase = process.env.NEXT_PUBLIC_API_BASE;
+const urlBase =
+  process.env.NODE_ENV === "production"
+    ? `https://${process.env.VERCEL_URL}/api`
+    : process.env.NEXT_PUBLIC_API_BASE;
 export const createThread = async ({
   message,
   doctorId,

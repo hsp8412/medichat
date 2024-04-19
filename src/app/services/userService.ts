@@ -9,7 +9,10 @@ export type User = {
   bio?: string;
   specialties?: string;
 };
-const urlBase = process.env.NEXT_PUBLIC_API_BASE;
+const urlBase =
+  process.env.NODE_ENV === "production"
+    ? `https://${process.env.VERCEL_URL}/api`
+    : process.env.NEXT_PUBLIC_API_BASE;
 export const getMe = async () => {
   try {
     const res = await httpService.get(`${urlBase}/auth/me`);
