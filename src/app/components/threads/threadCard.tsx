@@ -38,8 +38,8 @@ const ThreadCard = ({
     return (
       <div
         key={thread.id}
-        className={`w-full relative bg-white p-4 grid grid-cols-6 gap-3 rounded h-full  hover:shadow-xl transition-shadow duration-200 ease-in  ${
-          thread.closed ? "bg-gray-200" : "cursor-pointer"
+        className={`w-full relative  p-4 grid grid-cols-6 gap-3 rounded h-full  hover:shadow-xl transition-shadow duration-200 ease-in  ${
+          thread.closed ? "bg-gray-200" : " bg-white cursor-pointer"
         }`}
         onClick={() => handleSelectThread(thread)}
       >
