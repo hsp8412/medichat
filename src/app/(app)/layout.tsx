@@ -6,7 +6,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; /* eslint-disable import/first */
 import { Lexend } from "next/font/google";
 import { ReactNode } from "react";
-import NextAuthProvider from "@/app/components/nextAuthProvider";
+import NextAuthProvider from "@/app/components/auth/nextAuthProvider";
 import Navbar from "@/app/components/navbar/navbar";
 import "../globals.css";
 import { getServerSession } from "next-auth";
@@ -16,10 +16,12 @@ const lexend = Lexend({ subsets: ["latin"] });
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { redirect } from "next/navigation";
+import { MessagesProvider } from "@/app/contexts/messagesContext";
 
 export const metadata = {
   title: "Medichat",
-  description: "This is the home page of Medichat.",
+  description:
+    "Welcome to Medichat! A platform for patients and doctors to communicate.",
 };
 
 /**
@@ -39,15 +41,17 @@ export default async function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <NextAuthProvider>
-        <body className={`${lexend.className}`}>
-          <section
-            id=""
-            className="w-full flex flex-col h-screen overflow-auto"
-          >
-            <Navbar role={role} />
-            {children}
-          </section>
-          <ToastContainer position="bottom-right" />
+        <body className={`${lexend.className} bg-gray-100`}>
+          <MessagesProvider>
+            <section
+              id=""
+              className="w-full flex flex-col h-screen overflow-auto"
+            >
+              <Navbar role={role} />
+              {children}
+            </section>
+            <ToastContainer position="bottom-right" />
+          </MessagesProvider>
         </body>
       </NextAuthProvider>
     </html>

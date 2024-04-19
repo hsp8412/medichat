@@ -28,13 +28,14 @@ export async function GET(req: Request) {
         },
         {
           patientId: session.user.id,
+          closed: false,
         },
       ],
     },
     include: {
       messages: {
         orderBy: {
-          createdAt: "desc",
+          updatedAt: "desc",
         },
       },
       doctor: {
@@ -59,6 +60,9 @@ export async function GET(req: Request) {
           speciality: true,
         },
       },
+    },
+    orderBy: {
+      updatedAt: "desc",
     },
   });
 

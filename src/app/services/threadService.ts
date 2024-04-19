@@ -73,3 +73,11 @@ export const getMessages = async () => {
     throw e;
   }
 };
+
+export const closeThread = async (id: string) => {
+  try {
+    await httpService.delete(`${urlBase}/thread/${id}`);
+  } catch (e) {
+    throw e;
+  }
+};

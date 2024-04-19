@@ -11,9 +11,12 @@ export type User = {
 };
 const urlBase = process.env.NEXT_PUBLIC_API_BASE;
 export const getMe = async () => {
-  const res = await fetch(`${urlBase}/auth/getUser`);
-  const data = await res.json();
-  return data.user;
+  try {
+    const res = await httpService.get(`${urlBase}/auth/me`);
+    return res.data.user;
+  } catch (e) {
+    throw e;
+  }
 };
 
 export const getUsers = async () => {

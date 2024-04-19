@@ -19,16 +19,21 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  /*background: linear-gradient(*/
+  /*    to bottom,*/
+  /*    transparent,*/
+  /*    rgb(var(--background-end-rgb))*/
+  /*  )*/
+  /*  rgb(var(--background-start-rgb));*/
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+
+
+.truncate-text-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 8; /* Adjusted to 8 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 20px; /* Adjust line height as necessary */
+  max-height: 160px; /* Adjusted to line-height * number of lines (20px * 8 = 160px) */
 }

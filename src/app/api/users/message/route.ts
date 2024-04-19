@@ -16,6 +16,9 @@ export async function GET(req: Request) {
   const messages = await prisma.message.findMany({
     where: {
       receiverId: session.user.id,
+      thread: {
+        closed: false,
+      },
     },
     include: {
       sender: {

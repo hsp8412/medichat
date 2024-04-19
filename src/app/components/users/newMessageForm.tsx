@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
-import InputField from "@/app/components/inputField";
+import InputField from "@/app/components/users/inputField";
 import { User } from "@/app/services/userService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";

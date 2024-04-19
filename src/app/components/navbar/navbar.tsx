@@ -35,10 +35,11 @@ const patientNavItems: NavLink[] = [
   },
   {
     id: "3",
-    label: "My Chats",
+    label: "Messages",
     link: "/threads",
     displayOrder: 4,
     display: true,
+    unreadSignal: true,
   },
 ];
 
@@ -46,7 +47,7 @@ const doctorNavItems: NavLink[] = [
   {
     id: "1",
     label: "Home",
-    link: "/",
+    link: "/home",
     displayOrder: 1,
     display: true,
   },
@@ -59,7 +60,7 @@ const doctorNavItems: NavLink[] = [
   },
   {
     id: "3",
-    label: "My Chats",
+    label: "Messages",
     link: "/threads",
     displayOrder: 4,
     display: true,
@@ -70,20 +71,20 @@ const doctorNavItems: NavLink[] = [
 const Navbar = ({ role }: { role: string }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [loading, setLoading] = useState(true);
+  const { data: session } = useSession();
 
   const handleToggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
   let navItems = patientNavItems;
-  console.log(role);
   if (role === "Doctor") {
     navItems = doctorNavItems;
   }
 
   return (
-    <nav className="px-5 bg-white shadow lg:flex lg:items-center lg:justify-between dark:bg-neutral-800 min-h-[80px] ">
-      <div className="flex justify-between items-center">
+    <nav className="px-5 w-full bg-white shadow flex items-center justify-between dark:bg-neutral-800 min-h-[80px] ">
+      <div className="flex w-full lg:w-auto justify-between items-center">
         <Link href="/" className=" cursor-pointer flex items-center">
           <img src="/chat.png" alt="logo" width={40} height={40} />
           <span className="text-2xl ml-2 font-bold text-secondary">
@@ -108,8 +109,16 @@ const Navbar = ({ role }: { role: string }) => {
             navLink={navLink}
             setShowMenu={setShowMenu}
             key={navLink.id}
+            unread={navLink.unreadSignal || false}
           />
         ))}
+        <li className="mx-2 lg:mx-3 my-6 lg:my-0 text-xl">
+          Hi,{" "}
+          <Link href="/profile" className={"underline"}>
+            {session?.user?.username}
+          </Link>
+          !
+        </li>
         <li className="mx-2 lg:mx-3 my-6 lg:my-0">
           <button
             onClick={() => {

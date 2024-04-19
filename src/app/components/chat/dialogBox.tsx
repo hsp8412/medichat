@@ -1,5 +1,5 @@
 import React from "react";
-import ChatMsg from "@/app/components/chatMsg";
+import ChatMsg from "@/app/components/chat/chatMsg";
 import { Message, Thread } from ".prisma/client";
 import { User } from "@/app/services/userService";
 

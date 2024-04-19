@@ -3,6 +3,9 @@ import UsersList from "@/app/components/users/usersList";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBedPulse, faUserDoctor } from "@fortawesome/free-solid-svg-icons";
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
@@ -11,7 +14,22 @@ const Page = async () => {
     role = "Doctor";
   }
   return (
-    <div>
+    <div className={"w-full flex flex-col items-center mt-7"}>
+      {role === "Doctor" ? (
+        <div className={"w-8/12 flex justify-center"}>
+          <div className={"font-bold text-primary text-xl md:text-3xl"}>
+            <FontAwesomeIcon icon={faBedPulse} className={"me-2"} />
+            Connect with Patients
+          </div>
+        </div>
+      ) : (
+        <div className={"w-8/12 flex justify-center"}>
+          <div className={"font-bold text-primary text-xl md:text-3xl"}>
+            <FontAwesomeIcon icon={faUserDoctor} className={"me-2"} />
+            Connect with Doctors
+          </div>
+        </div>
+      )}
       <UsersList type={role === "Doctor" ? "patient" : "doctor"} />
     </div>
   );
