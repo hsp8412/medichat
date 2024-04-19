@@ -70,7 +70,10 @@ const MessageList = ({ id }: { id: string }) => {
       <div className={"w-full flex justify-center"}>
         <div className={"font-bold text-primary text-xl md:text-3xl"}>
           <FontAwesomeIcon icon={faCommentMedical} className={"me-2"} />
-          My Messages
+          Messages to{" "}
+          {session?.user.role === "Doctor"
+            ? thread?.patient.username
+            : thread?.doctor.username}
         </div>
       </div>
       <div className={"grow overflow-auto w-full flex justify-center"}>
