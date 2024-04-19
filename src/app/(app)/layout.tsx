@@ -10,13 +10,13 @@ import NextAuthProvider from "@/app/components/auth/nextAuthProvider";
 import Navbar from "@/app/components/navbar/navbar";
 import "../globals.css";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const lexend = Lexend({ subsets: ["latin"] });
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { redirect } from "next/navigation";
 import { MessagesProvider } from "@/app/contexts/messagesContext";
+import { authOptions } from "../../../authOptions";
 
 export const metadata = {
   title: "Medichat",

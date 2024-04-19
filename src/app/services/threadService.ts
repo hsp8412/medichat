@@ -1,5 +1,4 @@
 import httpService from "@/app/services/httpService";
-import { Thread } from ".prisma/client";
 
 const urlBase =
   process.env.NODE_ENV === "production"

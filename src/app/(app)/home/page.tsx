@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import HomeTabs from "@/app/components/home/homeTabs";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "../../../../authOptions";
 
 const Page = async () => {
   const session = await getServerSession(authOptions);

@@ -1,6 +1,5 @@
 import React from "react";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ThreadsList from "@/app/components/threads/threadsList";
 import {
   faBedPulse,
@@ -8,6 +7,7 @@ import {
   faUserDoctor,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { authOptions } from "../../../../authOptions";
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
