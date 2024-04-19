@@ -1,5 +1,4 @@
 import React from "react";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ProfileCard from "@/app/components/profile/profileCard";
 
 const Page = async () => {

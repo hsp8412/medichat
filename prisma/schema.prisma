@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+enum Role {
+  Doctor
+  Patient
+}
+
+enum MsgType {
+  Text
+  Image
+}
+
+model User {
+  id               String    @id @default(cuid())
+  username         String    @unique
+  avatarUrl        String?
+  email            String    @unique
+  emailVerified    DateTime?
+  passwordHash     String
+  isActive         Boolean   @default(true)
+  role             Role      @default(Patient)
+  Account          Account[]
+  Session          Session[]
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  doctorThreads    Thread[]  @relation("DoctorThreads")
+  patientThreads   Thread[]  @relation("PatientThreads")
+  messagesSent     Message[] @relation("SenderMessages")
+  messagesReceived Message[] @relation("ReceiverMessages")
+  speciality       String?
+  bio              String?
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Thread {
+  id        String    @id @default(cuid())
+  doctorId  String
+  patientId String
+  messages  Message[]
+  doctor    User      @relation("DoctorThreads", fields: [doctorId], references: [id])
+  patient   User      @relation("PatientThreads", fields: [patientId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  closed    Boolean   @default(false)
+}
+
+model Message {
+  id         String    @id @default(cuid())
+  type       MsgType
+  threadId   String
+  thread     Thread    @relation(fields: [threadId], references: [id])
+  senderId   String
+  sender     User      @relation("SenderMessages", fields: [senderId], references: [id])
+  receiverId String
+  receiver   User      @relation("ReceiverMessages", fields: [receiverId], references: [id])
+  content    String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  readTime   DateTime?
+}

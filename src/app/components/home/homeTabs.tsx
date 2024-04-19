@@ -8,8 +8,6 @@ import {
   faUser,
   faUserDoctor,
 } from "@fortawesome/free-solid-svg-icons";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { useSession } from "next-auth/react";
 import { MessageContext } from "@/app/contexts/messagesContext";
 
