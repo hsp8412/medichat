@@ -23,5 +23,14 @@ export async function POST(req: Request) {
     },
   });
 
+  await prisma.thread.update({
+    where: {
+      id: threadId,
+    },
+    data: {
+      updatedAt: new Date(),
+    },
+  });
+
   return NextResponse.json({ newMessage });
 }

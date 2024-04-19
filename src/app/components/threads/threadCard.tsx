@@ -38,7 +38,7 @@ const ThreadCard = ({
     return (
       <div
         key={thread.id}
-        className={`w-full relative  p-4 grid grid-cols-6 gap-3 rounded h-full  hover:shadow-xl transition-shadow duration-200 ease-in  ${
+        className={`w-full relative p-4 grid grid-cols-6 md:gap-3 rounded h-full  hover:shadow-xl transition-shadow duration-200 ease-in  ${
           thread.closed ? "bg-gray-200" : " bg-white cursor-pointer"
         }`}
         onClick={() => handleSelectThread(thread)}
@@ -67,15 +67,17 @@ const ThreadCard = ({
           </p>
         </div>
         <div className={"col-span-3 flex justify-start items-center"}>
-          <p className={"truncate"}>{thread.messages[0].content}</p>
+          <p className={"truncate text-sm md:text-base"}>
+            {thread.messages[0].content}
+          </p>
         </div>
         <div className={"col-span-1 flex justify-start items-center"}>
           {thread.closed ? (
-            <div>Closed</div>
+            <div className={"text-sm md:text-base"}>Closed</div>
           ) : (
             <button
               className={
-                "bg-red-500 text-white p-2 hover:bg-red-400 transition-all duration-200 ease-in rounded"
+                "text-sm md:text-base bg-red-500 text-white p-2 hover:bg-red-400 transition-all duration-200 ease-in rounded"
               }
               onClick={(e) => {
                 handleCloseClick(e);
