@@ -3,9 +3,9 @@ import { PrismaClient, User } from ".prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import { NextApiRequest, NextApiResponse } from "next";
+import prisma from "../../../../../prisma";
 
 const bcrypt = require("bcrypt");
-const prisma = new PrismaClient();
 
 //Next auth configurations
 export const authOptions: NextAuthOptions = {
@@ -83,9 +83,5 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  return await NextAuth(req, res, authOptions);
-}
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-  return await NextAuth(req, res, authOptions);
-}
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
