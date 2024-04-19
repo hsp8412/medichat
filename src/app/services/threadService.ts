@@ -2,7 +2,7 @@ import httpService from "@/app/services/httpService";
 
 const urlBase =
   process.env.NODE_ENV === "production"
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api`
+    ? `https://${process.env.NEXT_PRODUCTION_API_BASE}/api`
     : process.env.NEXT_PUBLIC_API_BASE;
 export const createThread = async ({
   message,
