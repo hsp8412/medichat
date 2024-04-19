@@ -64,7 +64,12 @@ const UsersList = ({ type }: Props) => {
           }
         >
           {paginated.map((user) => (
-            <div key={user.id} className={"h-[400px]"}>
+            <div
+              key={user.id}
+              className={`${
+                user.role === "Doctor" ? "h-[420px]" : "h-[400px]"
+              }`}
+            >
               <div
                 className={
                   "bg-white p-4 flex flex-col justify-center items-center rounded h-full"
@@ -72,7 +77,7 @@ const UsersList = ({ type }: Props) => {
               >
                 <div className={"flex flex-col justify-center items-center"}>
                   <img
-                    src={"/headshot.jpg"}
+                    src={user?.avatarUrl || "/headshot.jpg"}
                     alt={"headshot"}
                     className={"rounded-full w-24"}
                   />
