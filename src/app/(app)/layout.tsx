@@ -43,10 +43,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
       <NextAuthProvider>
         <body className={`${lexend.className} bg-gray-100`}>
           <MessagesProvider>
-            <section
-              id=""
-              className="w-full flex flex-col h-screen overflow-auto"
-            >
+            <section id="" className="w-full flex flex-col h-screen">
               <Navbar role={role} />
               {children}
             </section>

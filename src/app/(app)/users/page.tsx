@@ -14,7 +14,7 @@ const Page = async () => {
   return (
     <div className={"w-full flex flex-col items-center mt-7"}>
       {role === "Doctor" ? (
-        <div className={"w-8/12 flex justify-center"}>
+        <div className={"md:w-8/12 flex justify-center"}>
           <div className={"font-bold text-primary text-xl md:text-3xl"}>
             <FontAwesomeIcon icon={faBedPulse} className={"me-2"} />
             Connect with Patients

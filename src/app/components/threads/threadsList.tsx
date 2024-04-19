@@ -79,7 +79,7 @@ const ThreadsList = ({ type }: { type: "patient" | "doctor" }) => {
   const pageCount = Math.ceil(filteredThreads.length / pageSize);
   const paginatedThreads = _.chunk(filteredThreads, pageSize)[currentPage - 1];
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className={"my-6"}>Loading...</div>;
 
   return (
     <div className={"w-full flex flex-col items-center justify-center my-6"}>

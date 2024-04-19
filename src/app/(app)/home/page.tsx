@@ -13,7 +13,7 @@ const Page = async () => {
   return (
     <div className={"w-full grow flex justify-center"}>
       <div className={"container flex flex-col justify-center items-center"}>
-        <p className={"font-bold text-neutral-600 text-3xl mb-7"}>
+        <p className={"font-bold text-neutral-600 text-xl md:text-3xl mb-7"}>
           Welcome to Medichat!
         </p>
         <HomeTabs role={role} />

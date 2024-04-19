@@ -46,7 +46,7 @@ const UsersList = ({ type }: Props) => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className={"my-6"}>Loading...</div>;
   }
 
   let filteredUsers = users.filter((user) => user.role !== type);
@@ -57,7 +57,7 @@ const UsersList = ({ type }: Props) => {
 
   return (
     <>
-      <div className={"w-full flex justify-center my-6"}>
+      <div className={"w-full flex flex-col items-center gap-2 my-6"}>
         <div
           className={
             "w-11/12 md:w-8/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"

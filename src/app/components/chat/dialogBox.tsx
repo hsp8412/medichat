@@ -15,7 +15,7 @@ const DialogBox = ({
   endRef: any;
 }) => {
   return (
-    <div className={"w-8/12 flex flex-col items-start"}>
+    <div className={"w-full md:w-8/12 flex flex-col items-start"}>
       {messages.map((message) => (
         <div key={message.id}>
           <ChatMsg

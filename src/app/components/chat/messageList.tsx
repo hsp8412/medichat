@@ -84,7 +84,9 @@ const MessageList = ({ id }: { id: string }) => {
         />
       </div>
 
-      <div className={"w-8/12 flex justify-center items-center gap-4"}>
+      <div
+        className={"w-11/12 md:w-8/12 flex justify-center items-center gap-4"}
+      >
         <MessageInput value={text} setValue={setText} />
         <button
           className={`${
