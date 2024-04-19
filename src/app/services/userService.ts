@@ -11,7 +11,7 @@ export type User = {
 };
 const urlBase =
   process.env.NODE_ENV === "production"
-    ? `https://${process.env.NEXT_PRODUCTION_API_BASE}/api`
+    ? `${process.env.NEXT_PRODUCTION_API_BASE}/api`
     : process.env.NEXT_PUBLIC_API_BASE;
 export const getMe = async () => {
   try {
