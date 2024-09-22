@@ -10,13 +10,13 @@ Please visit: https://medichat-lyart.vercel.app/
 
 The credentials for a test doctor:
 
-Email: green@test.com
+- Email: green@test.com
 
-Password: 123123123
+- Password: 123123123
 
  
 The credentials for a test patient:
 
-Email: lisa@test.com
+- Email: lisa@test.com
 
-Password: 123123123
+- Password: 123123123
